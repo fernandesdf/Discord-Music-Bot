@@ -1,3 +1,6 @@
-Play
-O elif do Leave n ta a funcionar
-Exception MissingArgs no play
+Making the song play in command Play - Done
+Get Title of the track in Elif of command Play
+Queue in command Play
+
+Elif in command leave isn't working properly - Not done
+Exception MissingArgs in command Play - Not done

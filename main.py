@@ -14,31 +14,27 @@ client = commands.Bot(command_prefix="!")
 async def on_ready():
   print('Music Roi is ready!')
 
-@client.command()
-async def hello(ctx, arg):
-  print(ctx.message)
-  print(ctx.message.channel)
-  print(ctx.author.voice.channel)
-  print(ctx.guild.voice_client)
-  await ctx.send(arg)
-
+#@client.command()
+#async def test(ctx, arg):
+#  print(ctx.message)
+#  print(ctx.message.channel)
+#  print(ctx.author.voice.channel)
+#  print(ctx.guild.voice_client)
+#  await ctx.send(arg)
 
 @client.command() #ctx = context
 async def play(ctx, url : str):
 
-  # Join
-  # voice is a voiceClient but what is a voiceClient ?
-  voice = get(client.voice_clients, guild=ctx.guild)
-  #print(voice)
-  
+  # Join  
   if not ctx.guild.voice_client in client.voice_clients:
     voice = await ctx.author.voice.channel.connect()
     print('Connected to the channel: {0}'.format(ctx.author.voice.channel))
-  
+
+
+  # Play
   FFMPEG_OPTIONS = {
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
-  #YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
   YDL_OPTIONS = {
     'format': 'bestaudio/best',
     'extractaudio': True,
@@ -69,6 +65,8 @@ async def play(ctx, url : str):
       
       await ctx.send(embed=embed)
   else:
+    voice = get(client.voice_clients, guild=ctx.guild)
+    print(voice.source)
     embed = discord.Embed(
                 description="**{0}** is already being played".format("A track"),
                 color=discord.Color.orange())
@@ -96,16 +94,17 @@ async def resume(ctx):
 @client.command()
 async def skip(ctx):
   ctx.voice_client.stop()
-
-@client.command() #ctx = context
-async def leave(ctx):
-  # ctx.guild.voice_client = current voice channel ?
-  
-  #if ctx.guild.voice_client in client.voice_clients:
-  #  await ctx.send("The bot is not in your voice channel")
-  #else:
   embed = discord.Embed(
-                description="Leaving.",
+                description="Track has been skipped",
+                color=discord.Color.green())
+    
+  await ctx.send(embed=embed)
+
+@client.command()
+async def leave(ctx):  
+  
+  embed = discord.Embed(
+                description="Leaving... :wave:",
                 color=discord.Color.red())
     
   await ctx.send(embed=embed)
