@@ -1,0 +1,27 @@
+O play será smp uma lista/queue e smp q alguem der play, dá add
+[]
+
+se derem play de uma playlist, é cm se dessem add de uma lista e ficaria
+[ []  ]
+
+Problema: o que é q é adicionado à lista? O url?
+
+Pode haver 2 formas de fazer a lista:
+
+1. Cada index da lista é um url
+	e dps o url é tratado e transformado num objeto
+
+2. Cada index é o objeto já transformado resultante do url
+	Problema: Quando derem add de uma playlist, e a playlist é o primeiro index por exemplo ou é o segundo
+			e a playlist tem 10 musicas, o bot n irá dar musica até acabar de tratar os dados de tds as musicas
+
+Nota (dps de ter feito as 2 formas de fazer a lista): A playlist é apenas um url... n sei cm é tratado o url, se vem uma lista de dados tratados ou uma lista de urls, etc...
+
+
+
+
+
+queue = []
+
+queue.append()
+queue.pop(0)
